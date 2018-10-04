@@ -25,10 +25,11 @@ targetCohortTable<-"cohort"
 targetCohortId <- ???
 outcomeCohortId <- ???
 cdmversion <- "5"
-</code></pre>
 
-### CREATE TABLE & INPUT VALUE
-#### (T)
+##CREATE TABLE & INPUT VALUE
+#===========================================
+#(T)
+#===========================================
 <pre><code>
 sql <- SqlRender::readSql(paste(workingFolder,'/inst/sql/sql_server/','all_admission.sql',sep = '')) #local
 sql <- SqlRender::renderSql(sql,
@@ -43,7 +44,9 @@ sql <- SqlRender::translateSql(sql,
 
 DatabaseConnector::executeSql(connection,sql)
 
-#### (O)
+#===========================================
+#(O)
+#===========================================
 
 sql <- SqlRender::readSql(paste(workingFolder,'/inst/sql/sql_server/','ed_visit.sql',sep = '')) #local
 sql <- SqlRender::renderSql(sql,
@@ -55,10 +58,11 @@ sql <- SqlRender::renderSql(sql,
 sql <- SqlRender::translateSql(sql,
                                targetDialect=connectionDetails$dbms)$sql
 DatabaseConnector::executeSql(connection,sql)
+
 </code></pre>
 
 ## Extract from the Note
-
+<pre><code>
 #Setting for ff package
 options("fftempdir"="???")
 
@@ -154,3 +158,4 @@ population <- PatientLevelPrediction::createStudyPopulation(plpData,
 lrModel <- setLassoLogisticRegression()
 lrResults <- runPlp(population,plpData, modelSettings = lrModel, testSplit = 'person',
                     testFraction = 0.25, nfold = 2)
+</code></pre>
