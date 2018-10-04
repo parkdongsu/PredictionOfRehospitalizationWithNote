@@ -58,8 +58,8 @@ sql <- SqlRender::renderSql(sql,
 sql <- SqlRender::translateSql(sql,
                                targetDialect=connectionDetails$dbms)$sql
 DatabaseConnector::executeSql(connection,sql)
-
 </code></pre>
+
 
 ## Extract from the Note
 <pre><code>
