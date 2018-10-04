@@ -11,10 +11,7 @@ library(FeatureExtraction)
 library(PatientLevelPrediction)
 </code></pre>
 
-
-
-### DataBase Connection & CDM Settings
-<pre><code>
+### DataBase Connection & CDM Settings<pre><code>
 workingFolder<- '???'
 
 connectionDetails<-DatabaseConnector::createConnectionDetails(dbms="sql server",
@@ -35,8 +32,8 @@ outcomeCohortId <- ???
 cdmversion <- "5"
 </code></pre>
 
-### CREATE TABLE & INPUT VALUE
-<pre><code>
+### CREATE TABLE & INPUT VALUE<pre><code>
+
 #(T)
 sql <- SqlRender::readSql(paste(workingFolder,'/inst/sql/sql_server/','all_admission.sql',sep = '')) #local
 sql <- SqlRender::renderSql(sql,
@@ -65,8 +62,7 @@ DatabaseConnector::executeSql(connection,sql)
 </code></pre>
 
 
-### Extract from the Note
-<pre><code>
+### Extract from the Note<pre><code>
 #Setting for ff package
 options("fftempdir"="???")
 
