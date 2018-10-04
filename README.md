@@ -13,23 +13,23 @@ library(PatientLevelPrediction)
 
 ### DataBase Connection & CDM Settings
 <pre><code>
-workingFolder<- '???'
+workingFolder<- '???' ## Change to PredictionOfRehospitalizationWithNote path
 
 connectionDetails<-DatabaseConnector::createConnectionDetails(dbms="sql server",
-                                                              server="???.???.???.???",
-                                                              schema="???.dbo",
-                                                              user="???",
-                                                              password="???")
+                                                              server="???.???.???.???", ## Change to your IP
+                                                              schema="???.dbo", ## Change to your DB
+                                                              user="???", ## Change to your DataBase ID
+                                                              password="???") ## Change to your DataBase PW
 connection <- DatabaseConnector::connect(connectionDetails)
 
 connectionDetails <-connectionDetails
 connection <- connection
 
-cdmDatabaseSchema<-"???.dbo"
-targetDatabaseSchema<-"???.dbo"
+cdmDatabaseSchema<-"???.dbo" ## Change to CDM DB
+targetDatabaseSchema<-"???.dbo" ## Change to target CDM DB
 targetCohortTable<-"cohort"
-targetCohortId <- ???
-outcomeCohortId <- ???
+targetCohortId <- ??? ## Change to Target Cohort Number
+outcomeCohortId <- ??? ## Change to Outcome Cohort Number
 cdmversion <- "5"
 </code></pre>
 
@@ -70,23 +70,23 @@ DatabaseConnector::executeSql(connection,sql)
 options("fftempdir"="???")
 
 connectionDetails<-DatabaseConnector::createConnectionDetails(dbms="sql server",
-                                                              server="???.???.???.???",
-                                                              schema="???.dbo",
-                                                              user="???",
-                                                              password="???")
+                                                              server="???.???.???.???", ## Change to your IP
+                                                              schema="???.dbo", ## Change to your DB
+                                                              user="???", ## Change to your DataBase ID
+                                                              password="???") ## Change to your DataBase PW
 connection <- DatabaseConnector::connect(connectionDetails)
 
 connectionDetails <-connectionDetails
 connection <- connection
 
 oracleTempSchema = NULL
-cdmDatabaseSchema <- '???.dbo'
-targetDatabaseSchema<-"???.dbo"
-resultsDatabaseSchema<-"???.dbo"
+cdmDatabaseSchema <- '???.dbo' ## Change to CDM DB
+targetDatabaseSchema<-"???.dbo" ## Change to target CDM DB
+resultsDatabaseSchema<-"???.dbo" ## Change to result CDM DB
 cohortTable <- 'cohort'
 cohortId = targetCohortId
 outcomeId <- outcomeCohortId
-noteConceptId = 44814637
+noteConceptId = 44814637 ## It is Discharge record
 cdmVersion = "5"
 rowIdField = "subject_id"
 
@@ -140,16 +140,16 @@ plpData <- PatientLevelPrediction::getPlpData(connectionDetails = connectionDeta
                       oracleTempSchema = oracleTempSchema,
                       cohortDatabaseSchema = targetDatabaseSchema,
                       cohortTable = "cohort",
-                      cohortId = ???,
+                      cohortId = cohortId,
                       washoutPeriod = 0,
                       covariateSettings = covariateSettingsList,
                       outcomeDatabaseSchema = resultsDatabaseSchema,
                       outcomeTable = "cohort",
-                      outcomeIds = ???,
+                      outcomeIds = outcomeId,
                       cdmVersion = cdmVersion)
 
 population <- PatientLevelPrediction::createStudyPopulation(plpData,
-                                    outcomeId = ???,
+                                    outcomeId = outcomeId,
                                     includeAllOutcomes = TRUE,
                                     firstExposureOnly = FALSE,
                                     washoutPeriod = 0,
