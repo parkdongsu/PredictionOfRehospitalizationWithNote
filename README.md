@@ -1,12 +1,20 @@
 # PredictionOfRehospitalizationWithNote
 
-## Create Cohort
+## Getting Start
+PredictionOfRehospitalization with variable Model
+
+### Library
 <pre><code>
 library(DatabaseConnector)
 library(SqlRender)
 library(FeatureExtraction)
 library(PatientLevelPrediction)
+</code></pre>
 
+
+
+### DataBase Connection & CDM Settings
+<pre><code>
 workingFolder<- '???'
 
 connectionDetails<-DatabaseConnector::createConnectionDetails(dbms="sql server",
@@ -25,10 +33,11 @@ targetCohortTable<-"cohort"
 targetCohortId <- ???
 outcomeCohortId <- ???
 cdmversion <- "5"
+</code></pre>
 
 ##CREATE TABLE & INPUT VALUE
 #(T)
-<pre><code>
+
 sql <- SqlRender::readSql(paste(workingFolder,'/inst/sql/sql_server/','all_admission.sql',sep = '')) #local
 sql <- SqlRender::renderSql(sql,
                             cdm_database_schema=cdmDatabaseSchema,
@@ -53,12 +62,12 @@ sql <- SqlRender::renderSql(sql,
 sql <- SqlRender::translateSql(sql,
                                targetDialect=connectionDetails$dbms)$sql
 DatabaseConnector::executeSql(connection,sql)
-</code></pre>
+
 
 
 ##Extract from the Note
 
-<pre><code>
+
 #Setting for ff package
 options("fftempdir"="???")
 
@@ -154,4 +163,4 @@ population <- PatientLevelPrediction::createStudyPopulation(plpData,
 lrModel <- setLassoLogisticRegression()
 lrResults <- runPlp(population,plpData, modelSettings = lrModel, testSplit = 'person',
                     testFraction = 0.25, nfold = 2)
-</code></pre>
+
