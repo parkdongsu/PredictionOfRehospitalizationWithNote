@@ -1,6 +1,6 @@
 # PredictionOfRehospitalizationWithNote
 
-##Create Cohort
+## Create Cohort
 
 library(DatabaseConnector)
 library(SqlRender)
@@ -28,10 +28,8 @@ targetCohortId <- ???
 outcomeCohortId <- ???
 cdmversion <- "5"
 
-#CREATE TABLE & INPUT VALUE
-#===========================================
-# (T)
-#===========================================
+### CREATE TABLE & INPUT VALUE
+#### (T)
 sql <- SqlRender::readSql(paste(workingFolder,'/inst/sql/sql_server/','all_admission.sql',sep = '')) #local
 sql <- SqlRender::renderSql(sql,
                             cdm_database_schema=cdmDatabaseSchema,
@@ -45,9 +43,7 @@ sql <- SqlRender::translateSql(sql,
 
 DatabaseConnector::executeSql(connection,sql)
 
-#===========================================
-# (O)
-#===========================================
+#### (O)
 
 sql <- SqlRender::readSql(paste(workingFolder,'/inst/sql/sql_server/','ed_visit.sql',sep = '')) #local
 sql <- SqlRender::renderSql(sql,
@@ -61,10 +57,10 @@ sql <- SqlRender::translateSql(sql,
 DatabaseConnector::executeSql(connection,sql)
 
 
-##Extract from the Note
+## Extract from the Note
 
 #Setting for ff package
-options("fftempdir"="D:/temp")
+options("fftempdir"="???")
 
 connectionDetails<-DatabaseConnector::createConnectionDetails(dbms="sql server",
                                                               server="???.???.???.???",
@@ -87,7 +83,7 @@ noteConceptId = 44814637
 cdmVersion = "5"
 rowIdField = "subject_id"
 
-#
+
 covariateSettings <- CustomCovariateSetting::createTopicFromNoteSettings(useTopicFromNote = TRUE,
                                                  useDictionary = TRUE,
                                                  useTopicModeling = TRUE,
